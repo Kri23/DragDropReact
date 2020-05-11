@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Board from './Board/Board';
+import Card from './Card/Card'
 
 function App() {
+  const [state, setState] = useState({
+    count: 1,
+    child : []
+  })
+  const addChild = (e) => {
+    const msg = document.getElementById('msg').value;
+    if(!msg){return}
+    setState({
+    child: [...state.child, <Card id={state.count} msg={msg}/>],
+    count: state.count+1
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Ip">
+        <input id="msg" type="text" placeholder="Card Msg"></input>
+        <button onClick={addChild}>Add Component</button>
+      </div>
+      {state.child}
+      <div className="flex"><Board/><Board/><Board/><Board/><Board/><Board/><Board/><Board/></div>
     </div>
   );
-}
+} 
 
 export default App;
